@@ -148,7 +148,7 @@ export default function Profil() {
     return (
       <div className="max-w-[1200px] mx-auto px-4 mt-[100px] xs:mt-[120px] sm:mt-[150px] lg:mt-[200px] mb-10 xs:mb-12 sm:mb-16 lg:mb-20 flex justify-center min-h-screen">
 
-        <div className="w-full max-w-[490px] rounded-[20px] xs:rounded-[25px] sm:rounded-[32px] border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl p-5 xs:p-6 sm:p-8 lg:p-10 text-center">
+        <div className="w-full max-w-[490px] h-[240px] rounded-[20px] xs:rounded-[25px] sm:rounded-[32px] border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl p-5 xs:p-6 sm:p-8 lg:p-10 text-center">
 
           <h1 className="text-white text-xl xs:text-2xl sm:text-[26px] font-bold mb-2 xs:mb-3">
             Profilni ko'rish uchun kiring
@@ -183,8 +183,19 @@ export default function Profil() {
   }
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 mt-[80px] xs:mt-[100px] sm:mt-[120px] lg:mt-[130px] mb-8 xs:mb-10 sm:mb-12 lg:mb-16">
-
+      <div className="
+    max-w-[1200px]
+    mx-auto
+    px-4
+    -mt-[120px]
+    xs:-mt-[120px]
+    sm:-mt-[120px]
+    lg:-mt-[120px]
+    mb-8
+    xs:mb-10
+    sm:mb-12
+    lg:mb-16
+    ">
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[340px_1fr] gap-4 xs:gap-5 sm:gap-6 lg:gap-5">
 
         {/* LEFT PROFILE */}

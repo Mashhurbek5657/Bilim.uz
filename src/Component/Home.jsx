@@ -18,21 +18,21 @@ export default function Home() {
             <div />
 
             {/* HERO SECTION */}
-            <div className="relative z-10 mt-[80px] xs:mt-[80px] sm:mt-[100px] md:mt-[120px] lg:mt-[150px] flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-0">
+            <div className="relative z-10 -mt-[70px] md:mt-[80px] md:xs:mt-[80px] md:sm:mt-[100px] md:md:mt-[120px] lg:mt-[150px] flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-0">
 
                 {/* LEFT */}
                 <div className="w-full lg:w-[52%]">
 
                     {/* BADGE */}
-                    <div className="flex items-center gap-2 w-fit bg-[#0B1025]/80 border border-[#24306E] text-slate-300 text-[9px] xs:text-[10px] sm:text-[11px] px-2 xs:px-3 py-1 xs:py-1.5 rounded-full">
+                    <div className="flex items-center gap-2 w-fit bg-[#0B1025]/80 border border-[#24306E] text-slate-300 text-[9px] xs:text-[10px] sm:text-[11px] px-2 xs:px-3 py-1 xs:py-1.5 rounded-full mx-auto md:mx-0">
                         <Sparkles size={12} className="text-cyan-400" />
                         <p>Yangi avlod ta'lim platformasi</p>
                     </div>
 
                     {/* TITLE */}
-                    <div className="mt-4 xs:mt-5 sm:mt-6 leading-[40px] xs:leading-[48px] sm:leading-[56px] md:leading-[64px] lg:leading-[68px] font-bold text-[32px] xs:text-[40px] sm:text-[48px] md:text-[56px] lg:text-[68px]">
+                    <div className="mt-4 xs:mt-5 sm:mt-6 leading-[40px] xs:leading-[48px] sm:leading-[56px] md:leading-[64px] lg:leading-[68px] font-bold text-[50px] xs:text-[36px] sm:text-[44px] md:text-[52px] lg:text-[68px] text-center md:text-left">
 
-                        <div className="flex items-center gap-2 xs:gap-3 flex-wrap">
+                        <div className="flex items-center gap-2 xs:gap-3 flex-wrap justify-center md:justify-start">
                             <h1>Bilim</h1>
 
                             <h1 className="bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
@@ -40,13 +40,13 @@ export default function Home() {
                             </h1>
                         </div>
 
-                        <h1>sayohat</h1>
-                        <h1>boshlansin</h1>
+                        <h1 className=" mt-2">sayohat</h1>
+                        <h1 className=" mt-2">boshlansin</h1>
 
                     </div>
 
                     {/* DESCRIPTION */}
-                    <div className="mt-4 xs:mt-5 sm:mt-6 text-[#9FA5C5] text-[14px] xs:text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] xs:leading-[26px] sm:leading-[28px] lg:leading-[30px]">
+                    <div className="mt-4 xs:mt-5 sm:mt-6 text-[#9FA5C5] text-[12px] xs:text-[14px] sm:text-[16px] lg:text-[18px] leading-[20px] xs:leading-[24px] sm:leading-[26px] lg:leading-[30px] text-center md:text-left">
                         <p>Testlar yech, XP yig', do'stlaring bilan musobaqalash va o'zbek</p>
                         <p>61-maktab dasturi bo'yicha eng yaxshi natijalarga erish.</p>
                     </div>
@@ -197,7 +197,7 @@ export default function Home() {
 
                     {/* CARDS */}
                     <div className="grid grid-cols-2 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 mt-6 xs:mt-8 sm:mt-10">
-                        
+
                         {/* MATEMATIKA */}
                         <NavLink to="/testlar">
                             <div className="h-[140px] xs:h-[145px] sm:h-[150px] hover:shadow-[0_0_10px_#1C265A,0_0_30px_#1C265A,0_0_120px_#1C265A] cursor-pointer rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] border border-[#1C265A] bg-[#081020]/40 backdrop-blur-xl p-3 xs:p-4 sm:p-5 hover:-translate-y-1 duration-300 transition-all">

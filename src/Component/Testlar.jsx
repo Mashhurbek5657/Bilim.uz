@@ -75,9 +75,36 @@ export default function Testlar() {
     };
 
     return (
-        <div className="min-h-screen flex justify-center mt-[60px] xs:mt-[80px] sm:mt-[100px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8">
+        <div className="min-h-screen flex justify-center -mt-[100px] xs:mt-[80px] sm:mt-[100px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8">
 
             <div className="w-full max-w-[1300px] py-6 xs:py-8 sm:py-10">
+
+                {/* BANNER */}
+                <div
+                    data-aos="fade-right"
+                    className="max-w-full rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] border border-[#20336B] bg-gradient-to-r from-[#07113A] via-[#0B163F] to-[#06142F] p-4 xs:p-6 sm:p-8 shadow-[0_0_40px_rgba(0,200,255,.15)] overflow-hidden relative mb-6 xs:mb-8 sm:mb-10"
+                >
+                    <div className="relative z-10">
+                        <h1 className="text-white text-2xl xs:text-3xl sm:text-4xl font-bold">
+                            📝 Testlarni boshlang
+                        </h1>
+                        <p className="text-[#A6AECD] text-sm xs:text-base sm:text-lg mt-2 xs:mt-3">
+                            14+ fan, 4 qiyinlik darajasi va 1000+ savollar
+                        </p>
+                        <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4 mt-4 xs:mt-5">
+                            <div className="px-3 xs:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-xl bg-[#071B4A] border border-[#223A78] text-white text-xs xs:text-sm">
+                                ⚡ Instant XP
+                            </div>
+                            <div className="px-3 xs:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-xl bg-[#071B4A] border border-[#223A78] text-white text-xs xs:text-sm">
+                                🏆 O'zingizni sinashtiring
+                            </div>
+                        </div>
+                    </div>
+                    <BookOpen
+                        size={80}
+                        className="absolute right-4 xs:right-6 sm:right-8 bottom-[-20px] xs:bottom-[-25px] lg:bottom-[-30px] text-cyan-400/20 animate-pulse"
+                    />
+                </div>
 
                 {/* HEADER */}
                 <h1

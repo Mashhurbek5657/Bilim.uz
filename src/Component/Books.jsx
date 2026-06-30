@@ -38,7 +38,7 @@ export default function Books() {
   }
 
   return (
-    <div className="min-h-screen mt-[60px] xs:mt-[80px] sm:mt-[100px] lg:mt-[150px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8 pb-10 xs:pb-12 sm:pb-16 lg:pb-20">
+    <div className="min-h-screen -mt-[70px] xs:mt-[80px] sm:mt-[100px] lg:mt-[150px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8 pb-10 xs:pb-12 sm:pb-16 lg:pb-20">
 
       {/* BANNER */}
       <div
