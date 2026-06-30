@@ -14,6 +14,7 @@ import Profil from "./Component/Profil";
 import BooksComponent from "./Component/Books";
 import BookReader from "./Component/BookReader";
 import Login from "./Component/Login";
+import Register from "./Component/Register";
 
 
 
@@ -264,12 +265,17 @@ function App(){
           element:<Testlar />
         },
 
-
+        
+        
         {
           path:"login",
           element:<Login />
         },
-
+        
+        {
+          path:"register",
+          element:<Register />
+        },
 
         {
           path:"quiz",

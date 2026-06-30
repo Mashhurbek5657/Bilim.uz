@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Profil() {
-
+  
   const [avatarUrl, setAvatarUrl] = useState("");
   const [xpData, setXpData] = useState({});
   const [history, setHistory] = useState([]);
@@ -20,10 +20,8 @@ export default function Profil() {
 
   const loadData = () => {
     setUser(
-      JSON.parse(
-        localStorage.getItem("user")
-      ) || {}
-    );
+      JSON.parse(localStorage.getItem("user") || "{}")
+     );
 
     setAvatarUrl(
       localStorage.getItem("profileImage") || ""
