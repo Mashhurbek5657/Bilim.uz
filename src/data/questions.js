@@ -1,0 +1,31 @@
+import {
+  matematika,
+  fizika,
+  biologiya,
+  kimyo,
+  informatika,
+  tarix,
+  inglizTili,
+  onatili,
+  adabiyot,
+  huquq,
+  sport,
+  geometriya,
+  texnologiya,  
+} from "./generateQuestions";
+
+export const questions = {
+  Matematika: matematika,
+  Fizika: fizika,
+  Biologiya: biologiya,
+  Kimyo: kimyo,
+  Informatika: informatika,
+  Tarix: tarix,
+  "Ingliz tili": inglizTili,
+  "Ona tili": onatili,
+  Adabiyot: adabiyot,
+  Huquq: huquq,
+  Sport: sport,
+  Geometriya: geometriya,
+  Texnologiya: texnologiya,
+};
