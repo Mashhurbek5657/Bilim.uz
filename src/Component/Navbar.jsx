@@ -1,4 +1,4 @@
-import { Sun, User, Home, Search, MessageCircle, Send } from "lucide-react";
+import { Sun, User, Home, Search, MessageCircle, Send, BookOpen, Text, TestTube, TestTube2Icon, TestTube2 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import img from "../../public/ChatGPT Image 11 июн. 2026 г., 20_37_15.png"
@@ -264,10 +264,10 @@ export default function Navbar() {
                                 <>
                                     {isActive && (
                                         <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
-                                            <Search size={20} className="xs:w-[24px] text-black" />
+                                            <TestTube2 size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}
-                                    <Search 
+                                    <TestTube2
                                         size={18} 
                                         className={`xs:w-[20px] transition-colors duration-300 ${
                                             isActive ? "text-white" : "text-gray-500"
@@ -293,15 +293,13 @@ export default function Navbar() {
                                 <>
                                     {isActive && (
                                         <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
-                                            <MessageCircle size={20} className="xs:w-[24px] text-black" />
+                                            <BookOpen size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}
-                                    <MessageCircle 
-                                        size={18} 
+                                    <BookOpen size={18} 
                                         className={`xs:w-[20px] transition-colors duration-300 ${
                                             isActive ? "text-white" : "text-gray-500"
-                                        }`} 
-                                    />
+                                        }`}  />
                                     <span className={`text-[10px] xs:text-[11px] mt-1 transition-colors duration-300 ${
                                         isActive ? "text-white" : "text-gray-400"
                                     }`}>
