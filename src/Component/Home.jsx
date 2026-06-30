@@ -41,7 +41,7 @@ export default function Home() {
                         </div>
 
                         <h1 className=" mt-2">sayohat</h1>
-                        <h1 className=" mt-2">boshlansin</h1>
+                        <h1 className=" mt-3">boshlansin</h1>
 
                     </div>
 
@@ -145,7 +145,7 @@ export default function Home() {
                     </div>
 
                     {/* XP CARD */}
-                    <div className="absolute top-[-10px] xs:top-[-20px] sm:top-[-30px] right-[0px] xs:right-[10px] w-[170px] xs:w-[200px] rounded-[20px] border border-white/10 bg-[#0B1025]/40 backdrop-blur-xl p-3 xs:p-4 animate-float2 text-sm xs:text-base">
+                    <div className="absolute top-[-40px] xs:top-[-20px] sm:top-[-30px] right-[0px] xs:right-[10px] w-[170px] xs:w-[200px] rounded-[20px] border border-white/10 bg-[#0B1025]/40 backdrop-blur-xl p-3 xs:p-4 animate-float2 text-sm xs:text-base">
 
                         <p className="text-[#BFC6E5] text-[11px] xs:text-[12px]">
                             ⚡ XP olindi
@@ -162,7 +162,7 @@ export default function Home() {
                     </div>
 
                     {/* STREAK */}
-                    <div className="absolute bottom-[30px] xs:bottom-[40px] sm:bottom-[50px] left-[10px] xs:left-[20px] h-[80px] xs:h-[90px] w-[180px] xs:w-[220px] rounded-[20px] border border-white/10 bg-[#0B1025]/40 backdrop-blur-xl p-3 xs:p-4 animate-float3 text-sm xs:text-base">
+                    <div className="absolute bottom-[-40px] xs:bottom-[40px] sm:bottom-[50px] left-[10px] xs:left-[20px] h-[80px] xs:h-[90px] w-[180px] xs:w-[220px] rounded-[20px] border border-white/10 bg-[#0B1025]/40 backdrop-blur-xl p-3 xs:p-4 animate-float3 text-sm xs:text-base">
 
                         <p className="text-[#BFC6E5] text-[11px] xs:text-[12px]">
                             🔥 Yutuqlarni qo'lga kiriting
@@ -376,7 +376,7 @@ export default function Home() {
                     {books.slice(0, 4).map((book) => (
                         <div
                             key={book.id}
-                            className="relative h-[380px] rounded-[24px] xs:rounded-[28px] sm:rounded-[32px] border border-[#1C265A] backdrop-blur-xl bg-[#0B1025] overflow-hidden shadow-[0_0_40px_rgba(28,38,90,0.3)] hover:shadow-[0_0_10px_#1C265A,0_0_50px_#1C265A] transition-all duration-500 hover:-translate-y-2"
+                            className="relative h-full rounded-[24px] xs:rounded-[28px] sm:rounded-[32px] border border-[#1C265A] backdrop-blur-xl bg-[#0B1025] overflow-hidden shadow-[0_0_40px_rgba(28,38,90,0.3)] hover:shadow-[0_0_10px_#1C265A,0_0_50px_#1C265A] transition-all duration-500 hover:-translate-y-2"
                         >
                             <img
                                 src={book.image}

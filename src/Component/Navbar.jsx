@@ -234,7 +234,7 @@ export default function Navbar() {
                             {({ isActive }) => (
                                 <>
                                     {isActive && (
-                                        <div className="absolute -top-8 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                                        <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
                                             <Home size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}
@@ -263,7 +263,7 @@ export default function Navbar() {
                             {({ isActive }) => (
                                 <>
                                     {isActive && (
-                                        <div className="absolute -top-8 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                                        <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
                                             <Search size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}
@@ -292,7 +292,7 @@ export default function Navbar() {
                             {({ isActive }) => (
                                 <>
                                     {isActive && (
-                                        <div className="absolute -top-8 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                                        <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
                                             <MessageCircle size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}
@@ -321,7 +321,7 @@ export default function Navbar() {
                             {({ isActive }) => (
                                 <>
                                     {isActive && (
-                                        <div className="absolute -top-8 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
+                                        <div className="absolute -top-7 xs:-top-10 w-12 xs:w-14 h-12 xs:h-14 rounded-full bg-white flex items-center justify-center shadow-lg">
                                             <User size={20} className="xs:w-[24px] text-black" />
                                         </div>
                                     )}

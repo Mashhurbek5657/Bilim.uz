@@ -183,23 +183,43 @@ export default function Profil() {
   }
 
   return (
-      <div className="
-    max-w-[1200px]
-    mx-auto
-    px-4
-    -mt-[120px]
-    xs:-mt-[120px]
-    sm:-mt-[120px]
-    lg:-mt-[120px]
-    mb-8
-    xs:mb-10
-    sm:mb-12
-    lg:mb-16
-    ">
-      <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[340px_1fr] gap-4 xs:gap-5 sm:gap-6 lg:gap-5">
+    <div
+      className="
+      max-w-[1200px]
+      mx-auto
+      px-4
+  
+      mt-[130px]
+  
+      xs:mt-[130px]
+      sm:mt-[130px]
+      md:mt-[130px]
+  
+      max-[767px]:-mt-[60px]
+  
+      mb-8
+      xs:mb-10
+      sm:mb-12
+      lg:mb-16
+      "
+    >
+
+      <div
+        className="
+          grid
+          grid-cols-1
+          md:grid-cols-[300px_1fr]
+          lg:grid-cols-[340px_1fr]
+    
+          gap-4
+          xs:gap-5
+          sm:gap-6
+          lg:gap-5
+          "
+      >
 
         {/* LEFT PROFILE */}
-        <div data-aos="fade-up-right" className="rounded-[20px] xs:rounded-[25px] sm:rounded-[28px] lg:rounded-[32px] border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl p-4 xs:p-5 sm:p-6 lg:p-7">
+        <div className="rounded-[20px] xs:rounded-[25px] sm:rounded-[28px] lg:rounded-[32px] border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl p-4 xs:p-5 sm:p-6 lg:p-7">
 
           <div className="flex flex-col items-center">
 
@@ -278,7 +298,7 @@ export default function Profil() {
             <label
               className="flex justify-center py-2 xs:py-2.5 sm:py-3 rounded-lg xs:rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-xs xs:text-sm sm:text-base cursor-pointer hover:shadow-[0_0_20px_rgba(34,211,238,.3)] transition-shadow duration-300"
             >
-               Rasm tanlash
+              Rasm tanlash
 
               <input
                 type="file"
@@ -361,7 +381,7 @@ export default function Profil() {
         <div className="space-y-4 xs:space-y-5 sm:space-y-6 lg:space-y-6">
 
           {/* FAN XP */}
-          <div data-aos="fade-left" className="rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] p-4 xs:p-5 border border-[#1C265A] bg-[#09112E]/60 text-white backdrop-blur-xl">
+          <div className="rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] p-4 xs:p-5 border border-[#1C265A] bg-[#09112E]/60 text-white backdrop-blur-xl">
 
             <h2 className="text-white font-bold text-base xs:text-lg sm:text-xl mb-3 xs:mb-4">
               Fanlar bo'yicha XP
@@ -390,7 +410,7 @@ export default function Profil() {
           </div>
 
           {/* HISTORY */}
-          <div data-aos="fade-up-left" className="rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] p-4 xs:p-5 border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl">
+          <div className="rounded-[20px] xs:rounded-[24px] sm:rounded-[28px] p-4 xs:p-5 border border-[#1C265A] bg-[#09112E]/60 backdrop-blur-xl">
 
             <h2 className="text-white font-bold text-base xs:text-lg sm:text-xl mb-3 xs:mb-4">
               Test tarixi ({filteredHistory.length})
