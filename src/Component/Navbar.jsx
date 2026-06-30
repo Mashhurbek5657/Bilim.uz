@@ -1,6 +1,7 @@
 import { Sun, User, Home, Search, MessageCircle, Send } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
+import img from "../../public/ChatGPT Image 11 июн. 2026 г., 20_37_15.png"
 
 export default function Navbar() {
 
@@ -80,7 +81,7 @@ export default function Navbar() {
 
                             <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
                                 <img
-                                    src="../../public/ChatGPT Image 11 июн. 2026 г., 20_37_15.png"
+                                    src={img}
                                     className="w-full h-full object-cover"
                                     alt="Logo"
                                 />

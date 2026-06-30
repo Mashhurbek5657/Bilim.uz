@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { books } from "./booksData";
+import img from "../../public/ChatGPT Image 11 июн. 2026 г., 20_37_15.png"
 
 export default function Home() {
     return (
@@ -124,7 +125,7 @@ export default function Home() {
                     {/* MAIN CIRCLE */}
                     <div className="animate-logo">
                         <img
-                            src="../../public/ChatGPT Image 11 июн. 2026 г., 20_37_15.png"
+                            src={img}
                             alt="Logo"
                             className="w-[200px] xs:w-[240px] sm:w-[280px] md:w-[320px] mt-4 xs:mt-6 sm:mt-8"
                         />
