@@ -176,7 +176,7 @@ export default function Register() {
 
         try {
 
-            const res = await fetch("https://bilim-olami.onrender.com/sendMessage",
+            const res = await fetch("https://github.com/Mashhurbek5657/Bilim-olami/sendMessage",
                 {
                     method: "POST",
 
