@@ -16,11 +16,8 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [passwordLevel, setPasswordLevel] = useState("");
 
-  // Agar backend bor bo'lsa, uni VITE_API_URL ga qo'ying (misol: http://localhost:3001)
-  const API_URL = import.meta.env.VITE_API_URL || ""; // bo'sh => to'g'ridan-to'g'ri Telegramga harakat qiladi (CORS bo'lishi mumkin)
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
-  // Agar siz to'g'ridan-to'g'ri Telegramga yubormoqchi bo'lsangiz,
-  // quyidagi token va chatId ni oldingi xabaringizdan berdingiz — lekin xavfsizlik uchun .env foydalaning.
   const BOT_TOKEN = "8645256830:AAEvQM4GO_BwCBUm-Hun6AY0sooyEBz4-D4";
   const CHAT_ID = "8585388313";
 
@@ -30,7 +27,7 @@ export default function Register() {
     if (/[a-z]/.test(v) && /[0-9]/.test(v) && /[!@#$%^&*]/.test(v)) {
       text = "Kuchli";
     } else if (/[a-z]/.test(v) && /[0-9]/.test(v)) {
-      text = "O‘rta";
+      text = "O'rta";
     } else if (/[a-z]/.test(v)) {
       text = "Oson";
     }
@@ -64,24 +61,22 @@ export default function Register() {
       surname,
       className,
       email,
-      password, // demo uchun: productionda serverda hash qiling va localStorage ga plain-text saqlamang
+      password,
       avatar: "",
       xp: 0,
       login: true,
     };
 
-    // profil saqlash (dizayn o'zgarmaydi)
+    // profil saqlash
     let users = JSON.parse(localStorage.getItem("users") || "[]");
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(newUser));
     localStorage.setItem("isLogin", "true");
+    localStorage.setItem("isAuthenticated", "true");
 
     // Telegramga yuborish
-    // Agar sizda backend (/sendMessage) mavjud bo'lsa: API_URL ni .env orqali belgilang va backend ga yuboring.
-    // Aks holda bu kod to'g'ridan-to'g'ri Telegram API ga yuboradi (CORS muammosi bo'lishi mumkin).
     try {
-      // Xabar matni (Telegramda ko'rinishi)
       const text = `
 🆕 Yangi foydalanuvchi ro'yxatdan o'tdi
 
@@ -95,7 +90,6 @@ export default function Register() {
 
       let sendRes;
       if (API_URL) {
-        // yuborish backend orqali (tavsiya etiladi)
         sendRes = await fetch(`${API_URL.replace(/\/$/, "")}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -111,16 +105,16 @@ export default function Register() {
 
         const data = await sendRes.json();
         if (sendRes.ok && data.success) {
-          localStorage.setItem("isAuthenticated", "true");
-          toast.success("Muvaffaqiyatli ro‘yxatdan o‘tildi");
-          navigate("/");
+          toast.success("Muvaffaqiyatli ro'yxatdan o'tildi");
+          // 👇 PROFILGA YO'NALT
+          navigate("/profil");
         } else {
           console.error("Backend yoki Telegram xatosi:", data);
           toast.warn("Profil saqlandi, lekin Telegramga yuborilmadi");
-          navigate("/");
+          // 👇 PROFILGA YO'NALT (xato bo'lsa ham)
+          navigate("/profil");
         }
       } else {
-        // TO'G'RIDAN-TO'G'RI TELEGRAM (CORS muammosi bo'lishi mumkin)
         sendRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -133,20 +127,21 @@ export default function Register() {
 
         const data = await sendRes.json();
         if (data && data.ok) {
-          localStorage.setItem("isAuthenticated", "true");
-          toast.success("Muvaffaqiyatli ro‘yxatdan o‘tildi");
-          navigate("/");
+          toast.success("Muvaffaqiyatli ro'yxatdan o'tildi");
+          // 👇 PROFILGA YO'NALT
+          navigate("/profil");
         } else {
           console.error("Telegram javobi xato:", data);
           toast.warn("Profil saqlandi, lekin Telegramga yuborilmadi");
-          navigate("/");
+          // 👇 PROFILGA YO'NALT (xato bo'lsa ham)
+          navigate("/profil");
         }
       }
     } catch (error) {
       console.error("FETCH XATO:", error);
-      // Agar CORS yoki boshqa xato bo'lsa — foydalanuvchiga profil saqlanganini bildir
-      toast.warn("Profil saqlandi, ammo Telegramga yuborilmadi (server bilan bog'lanib bo'lmadi)");
-      navigate("/");
+      toast.warn("Profil saqlandi, ammo Telegramga yuborilmadi");
+      // 👇 PROFILGA YO'NALT (xato bo'lsa ham)
+      navigate("/profil");
     } finally {
       setLoading(false);
     }
@@ -179,7 +174,7 @@ export default function Register() {
         />
 
         <div className="w-full">
-          <h1 className="text-white text-2xl font-bold">Ro‘yxatdan o‘tish</h1>
+          <h1 className="text-white text-2xl font-bold">Ro'yxatdan o'tish</h1>
 
           <p className="text-[#A6AECD] text-sm mt-1">Hisob yarating va testlarni boshlang.</p>
 
