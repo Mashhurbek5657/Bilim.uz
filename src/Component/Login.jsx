@@ -98,9 +98,7 @@ export default function Register() {
 
         toast.success("✅ Muvaffaqiyatli ro'yxatdan o'tildi...!");
         
-        setTimeout(() => {
-          navigate(`/profil`);
-        }, 1000);
+        navigate(`/profil/${user.id}`);
       }
     } catch (error) {
       console.error("❌ Xato:", error);
