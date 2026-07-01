@@ -14,7 +14,9 @@ const CHAT_ID = process.env.CHAT_ID || "8585388313";
 // In-memory database
 let users = [];
 
-app.get("/", (req, res) => res.json({ message: "Server ishlayapti 🚀" }));
+app.get("/", (req, res) => {
+  res.json({ message: "✅ Server ishlayapti 🚀" });
+});
 
 // 📝 REGISTER
 app.post("/api/register", async (req, res) => {
@@ -22,13 +24,19 @@ app.post("/api/register", async (req, res) => {
     const { name, surname, className, email, password, passwordLevel } = req.body;
 
     if (!name || !surname || !email || !password) {
-      return res.status(400).json({ success: false, message: "Barcha maydonlarni to'ldiring" });
+      return res.status(400).json({ 
+        success: false, 
+        message: "Barcha maydonlarni to'ldiring" 
+      });
     }
 
     // Email allaqachon mavjudligini tekshirish
     const existingUser = users.find(u => u.email === email);
     if (existingUser) {
-      return res.status(400).json({ success: false, message: "Email allaqachon ro'yxatdan o'tgan" });
+      return res.status(400).json({ 
+        success: false, 
+        message: "Email allaqachon ro'yxatdan o'tgan" 
+      });
     }
 
     const newUser = {
@@ -70,8 +78,11 @@ app.post("/api/register", async (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ success: false, message: err.message });
+    console.error("Register xatosi:", err);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
@@ -81,14 +92,20 @@ app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ success: false, message: "Email va parol kiriting" });
+      return res.status(400).json({ 
+        success: false, 
+        message: "Email va parol kiriting" 
+      });
     }
 
     // Foydalanuvchini topish
     const user = users.find(u => u.email === email && u.password === password);
     
     if (!user) {
-      return res.status(401).json({ success: false, message: "Email yoki parol notog'ri" });
+      return res.status(401).json({ 
+        success: false, 
+        message: "Email yoki parol notog'ri" 
+      });
     }
 
     return res.json({ 
@@ -104,8 +121,11 @@ app.post("/api/login", async (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ success: false, message: err.message });
+    console.error("Login xatosi:", err);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
@@ -115,7 +135,10 @@ app.get("/api/user/:id", (req, res) => {
     const user = users.find(u => u.id == req.params.id);
     
     if (!user) {
-      return res.status(404).json({ success: false, message: "Foydalanuvchi topilmadi" });
+      return res.status(404).json({ 
+        success: false, 
+        message: "Foydalanuvchi topilmadi" 
+      });
     }
 
     return res.json({ 
@@ -131,8 +154,11 @@ app.get("/api/user/:id", (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ success: false, message: err.message });
+    console.error("Get user xatosi:", err);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
@@ -150,10 +176,63 @@ app.get("/api/users", (req, res) => {
 
     return res.json({ success: true, users: allUsers });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ success: false, message: err.message });
+    console.error("Get users xatosi:", err);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
+// ✏️ UPDATE USER PROFILE
+app.put("/api/user/:id", (req, res) => {
+  try {
+    const user = users.find(u => u.id == req.params.id);
+    
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Foydalanuvchi topilmadi" 
+      });
+    }
+
+    // Yangilash
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.surname) user.surname = req.body.surname;
+    if (req.body.avatar) user.avatar = req.body.avatar;
+    if (req.body.xp !== undefined) user.xp = req.body.xp;
+
+    return res.json({ 
+      success: true, 
+      user: { 
+        id: user.id, 
+        name: user.name, 
+        surname: user.surname, 
+        email: user.email, 
+        className: user.className,
+        xp: user.xp,
+        avatar: user.avatar
+      }
+    });
+  } catch (err) {
+    console.error("Update user xatosi:", err);
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
+  }
+});
+
+// ❌ ERROR HANDLING
+app.use((err, req, res, next) => {
+  console.error("Server xatosi:", err);
+  res.status(500).json({ 
+    success: false, 
+    message: "Server xatosi yuz berdi" 
+  });
+});
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`✅ Server ishlayapti: http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✅ Server ishlayapti: http://localhost:${PORT}`);
+});
