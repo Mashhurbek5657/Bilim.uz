@@ -1,125 +1,125 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Loader } from "lucide-react";
 
 export default function Register() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [className, setClassName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [className, setClassName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const register = (e) => {
-        e.preventDefault();
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [passwordLevel, setPasswordLevel] = useState("");
 
-        if (!name || !surname || !className || !email || !password) {
-            alert("Barcha joylarni to'ldiring");
-            return;
-        }
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
-        localStorage.setItem(
-            "user",
-            JSON.stringify(newUser)
-        );
+  const checkPassword = (v) => {
+    let text = "";
+    if (/[a-z]/.test(v) && /[0-9]/.test(v) && /[!@#$%^&*]/.test(v)) text = "Kuchli";
+    else if (/[a-z]/.test(v) && /[0-9]/.test(v)) text = "O‘rta";
+    else if (/[a-z]/.test(v)) text = "Oson";
+    setPasswordLevel(text);
+  };
 
-        const users = JSON.parse(
-            localStorage.getItem("users") || "[]"
-        );
+  const register = async (e) => {
+    e.preventDefault();
+    let err = {};
+    if (name.trim().length < 2) err.name = true;
+    if (surname.trim().length < 2) err.surname = true;
+    if (isNaN(Number(className)) || Number(className) < 1 || Number(className) > 11) err.className = true;
+    if (!email.includes("@gmail.com")) err.email = true;
+    if (password.length < 8) err.password = true;
 
-        const exist = users.find(
-            (u) => u.email === email
-        );
+    setErrors(err);
+    if (Object.keys(err).length) {
+      toast.error("Ma'lumotlarni tekshiring");
+      return;
+    }
 
-        if (exist) {
-            alert("Bu email avval ro'yxatdan o'tgan");
-            return;
-        }
+    setLoading(true);
 
-        const newUser = {
-            name,
-            surname,
-            className,
-            email,
-            password,
-            avatar:"",
-            xp:0,
-            login:true
-           }
-
-        const updatedUsers = [...users, newUser];
-
-        localStorage.setItem(
-            "users",
-            JSON.stringify(updatedUsers)
-        );
-
-        localStorage.setItem(
-            "users",
-            JSON.stringify(updatedUsers)
-        );
-
-        localStorage.setItem(
-            "currentUserId",
-            newUser.id
-        );
-
-        localStorage.setItem(
-            "user",
-            JSON.stringify(newUser)
-        );
-
-        navigate("/profil");
-
-        navigate("/profil");
+    const newUser = {
+      id: Date.now(),
+      name: name.trim(),
+      surname: surname.trim(),
+      className,
+      email: email.trim(),
+      password, // demo only
+      avatar: "",
+      xp: 0,
+      login: true,
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center">
-            <form
-                onSubmit={register}
-                className="bg-[#09112E] p-6 rounded-xl"
-            >
-                <input
-                    className="block mb-2 p-2"
-                    placeholder="Ism"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+    // Save locally
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    const publicUser = { ...newUser };
+    delete publicUser.password;
+    localStorage.setItem("user", JSON.stringify(publicUser));
+    localStorage.setItem("isLogin", "true");
 
-                <input
-                    className="block mb-2 p-2"
-                    placeholder="Familiya"
-                    value={surname}
-                    onChange={(e) => setSurname(e.target.value)}
-                />
+    // send to backend -> Telegram
+    try {
+      const res = await fetch(`${API_URL}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "register",
+          name: newUser.name,
+          surname: newUser.surname,
+          className: newUser.className,
+          email: newUser.email,
+          passwordLevel,
+        }),
+      });
 
-                <input
-                    className="block mb-2 p-2"
-                    placeholder="Sinf"
-                    value={className}
-                    onChange={(e) => setClassName(e.target.value)}
-                />
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success("Muvaffaqiyatli ro‘yxatdan o‘tildi");
+      } else {
+        console.error("Telegram yoki server xatosi:", data);
+        toast.warn("Profil saqlandi, lekin Telegram xabari yuborilmadi");
+      }
+      navigate("/"); // home — adjust as needed
+    } catch (err) {
+      console.error("FETCH ERROR:", err);
+      toast.warn("Profil saqlandi, ammo server bilan bog'lanib bo'lmadi");
+      navigate("/");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                <input
-                    className="block mb-2 p-2"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+  return (
+    <div className="min-h-screen flex items-center justify-center px-5 mt-[40px]">
+      <div className="flex flex-col lg:flex-row gap-6 shadow-xl w-full max-w-[900px] p-4 sm:p-6 rounded-[26px] border border-purple-500/40 bg-[#090B2A]/70">
+        <div className="w-full">
+          <h1 className="text-white text-2xl font-bold">Ro‘yxatdan o‘tish</h1>
+          <p className="text-[#A6AECD] text-sm mt-1">Hisob yarating va xizmatlardan foydalaning.</p>
 
-                <input
-                    type="password"
-                    className="block mb-2 p-2"
-                    placeholder="Parol"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+          <form onSubmit={register} className="mt-6 space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <input placeholder="Ism" value={name} onChange={(e) => setName(e.target.value)} className={`w-full rounded-lg bg-[#10133A] border px-3 py-2 text-white ${errors.name ? "border-red-500" : "border-[#273066]"}`} />
+              <input placeholder="Familiya" value={surname} onChange={(e) => setSurname(e.target.value)} className={`w-full rounded-lg bg-[#10133A] border px-3 py-2 text-white ${errors.surname ? "border-red-500" : "border-[#273066]"}`} />
+            </div>
 
-                <button className="bg-purple-600 px-4 py-2 text-white">
-                    Ro'yxatdan o'tish
-                </button>
-            </form>
+            <input placeholder="Sinf" value={className} onChange={(e) => setClassName(e.target.value)} className={`w-full rounded-lg bg-[#10133A] border px-3 py-2 text-white ${errors.className ? "border-red-500" : "border-[#273066]"}`} />
+            <input placeholder="example@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} className={`w-full rounded-lg bg-[#10133A] border px-3 py-2 text-white ${errors.email ? "border-red-500" : "border-[#273066]"}`} />
+            <input type="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value); checkPassword(e.target.value); }} className={`w-full rounded-lg bg-[#10133A] border px-3 py-2 text-white ${errors.password ? "border-red-500" : "border-[#273066]"}`} />
+            {password && <p className="text-white text-sm">Parol darajasi: {passwordLevel}</p>}
+
+            <button disabled={loading} className="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-semibold flex justify-center gap-2">
+              {loading && <Loader className="animate-spin" size={18} />} Hisob ochish
+            </button>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
