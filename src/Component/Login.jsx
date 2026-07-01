@@ -176,7 +176,7 @@ export default function Register() {
 
         try {
 
-            const res = await fetch("https://bilim-olami-api.onrender.com/sendMessage",
+            const res = await fetch("https://bilim-olami.onrender.com/sendMessage",
                 {
                     method: "POST",
 
