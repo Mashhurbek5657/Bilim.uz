@@ -99,7 +99,7 @@ export default function Register() {
         toast.success("✅ Muvaffaqiyatli ro'yxatdan o'tildi...!");
         
         setTimeout(() => {
-          navigate(`/profil/${user.id}`);
+          navigate(`/profil`);
         }, 1000);
       }
     } catch (error) {
