@@ -33,7 +33,7 @@ export default function Home() {
                     <div className="mt-4 xs:mt-5 sm:mt-6 leading-[40px] xs:leading-[48px] sm:leading-[56px] md:leading-[64px] lg:leading-[68px] font-bold text-[50px] xs:text-[36px] sm:text-[44px] md:text-[52px] lg:text-[68px] text-center md:text-left">
 
                         <div className="flex items-center gap-2 xs:gap-3 flex-wrap justify-center md:justify-start">
-                            <h1>Bilim</h1>
+                            <h1></h1>
 
                             <h1 className="bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
                                 olamiga
