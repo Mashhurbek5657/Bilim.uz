@@ -166,7 +166,7 @@ items-center
 justify-center 
 px-5 
 mt-[40px]
-max-md:-mt-[110px]
+max-md:-mt-[90px]
 ">
             <div
                 className="
