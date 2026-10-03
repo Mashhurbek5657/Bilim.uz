@@ -18,7 +18,7 @@ export default function Home() {
             <div />
 
             {/* HERO SECTION */}
-            <div className="relative z-10 -mt-[70px] md:mt-[80px] md:xs:mt-[80px] md:sm:mt-[100px] md:md:mt-[120px] lg:mt-[150px] flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-0">
+            <div className="relative z-10 md:mt-[80px] md:xs:mt-[80px] md:sm:mt-[100px] md:md:mt-[120px] lg:mt-[150px] flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-0">
 
                 {/* LEFT */}
                 <div className="w-full lg:w-[52%]">
@@ -47,7 +47,7 @@ export default function Home() {
 
                     {/* DESCRIPTION */}
                     <div className="mt-4 xs:mt-5 sm:mt-6 text-[#9FA5C5] text-[12px] xs:text-[14px] sm:text-[16px] lg:text-[18px] leading-[20px] xs:leading-[24px] sm:leading-[26px] lg:leading-[30px] text-center md:text-left">
-                        <p>Testlar yech, XP yig', do'stlaring bilan musobaqalash va o'zbek</p>
+                        <p>Testlar yech, XP yeg', do'stlaring bilan musobaqalash va</p>
                         <p>61-maktab dasturi bo'yicha eng yaxshi natijalarga erish.</p>
                     </div>
 

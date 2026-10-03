@@ -221,3 +221,101 @@ body::before {
     scrollbar-width: thin;
     scrollbar-color: #014378ac #09112E;
   }
+
+  .classes-section {
+    min-height: 100vh;
+    padding: 120px 20px;
+    background: #040816;
+    overflow: hidden;
+  }
+  
+  .classes-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  
+  .class-card {
+    padding: 35px;
+    min-height: 280px;
+  
+    background: rgba(11, 16, 37, 0.85);
+    border: 1px solid #1c265a;
+    border-radius: 24px;
+  
+    opacity: 0;
+    transform: translateY(100px);
+  
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .class-card.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .class-card:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+  
+  .class-card:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  
+  .class-card:hover {
+    transform: translateY(-10px);
+    border-color: #00eaff;
+    box-shadow:
+      0 0 30px rgba(0, 234, 255, 0.12),
+      inset 0 0 30px rgba(0, 100, 255, 0.05);
+  }
+  
+  .class-card span {
+    color: #00eaff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  .class-card h2 {
+    margin-top: 20px;
+    color: white;
+    font-size: 32px;
+    font-weight: 800;
+  }
+  
+  .class-card p {
+    margin-top: 15px;
+    color: #9fa5c5;
+    line-height: 1.7;
+  }
+  
+  .class-card button {
+    margin-top: 25px;
+    padding: 11px 20px;
+  
+    color: white;
+    background: #111b42;
+    border: 1px solid #26366f;
+    border-radius: 10px;
+  
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .class-card button:hover {
+    background: #00eaff;
+    color: #020617;
+  }
+  
+  @media (max-width: 800px) {
+    .classes-container {
+      grid-template-columns: 1fr;
+    }
+  }

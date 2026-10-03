@@ -11,6 +11,7 @@ import {
     Landmark,
     Dumbbell,
     Calculator,
+    Gamepad2,
 } from "lucide-react";
 
 import { useState, useEffect } from "react";
@@ -32,6 +33,7 @@ export default function Testlar() {
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [difficulty, setDifficulty] = useState("O'rta");
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [gameMode, setGameMode] = useState("solo"); // "solo" yoki "multiplayer"
 
     const navigate = useNavigate();
 
@@ -63,7 +65,8 @@ export default function Testlar() {
         navigate("/quiz", {
             state: {
                 subject: selectedSubject,
-                difficulty
+                difficulty,
+                mode: gameMode
             }
         });
     };
@@ -75,7 +78,7 @@ export default function Testlar() {
     };
 
     return (
-        <div className="min-h-screen flex justify-center -mt-[100px] xs:mt-[80px] sm:mt-[100px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8">
+        <div className="min-h-screen flex justify-center -mt-[50px] xs:mt-[80px] sm:mt-[100px] px-4 xs:px-4 sm:px-4 md:px-6 lg:px-8">
 
             <div className="w-full max-w-[1300px] py-6 xs:py-8 sm:py-10">
 
@@ -98,12 +101,65 @@ export default function Testlar() {
                             <div className="px-3 xs:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-xl bg-[#071B4A] border border-[#223A78] text-white text-xs xs:text-sm">
                                 🏆 O'zingizni sinashtiring
                             </div>
+                            <div className="px-3 xs:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-xl bg-[#071B4A] border border-[#223A78] text-white text-xs xs:text-sm">
+                                👥 Raqobat rejimi
+                            </div>
                         </div>
                     </div>
                     <BookOpen
                         size={80}
                         className="absolute right-4 xs:right-6 sm:right-8 bottom-[-20px] xs:bottom-[-25px] lg:bottom-[-30px] text-cyan-400/20 animate-pulse"
                     />
+                </div>
+
+                {/* GAME MODE SELECTOR */}
+                <div data-aos="fade-up" className="mb-8 xs:mb-10 sm:mb-12">
+                    <h2 className="text-white text-xl xs:text-2xl font-bold mb-3 xs:mb-4">
+                         O'yin rejimi
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 xs:gap-4">
+                        {/* Solo Mode */}
+                        <button
+                            onClick={() => setGameMode("solo")}
+                            className={`p-4 xs:p-5 rounded-[18px] xs:rounded-[20px] border-2 transition-all duration-300 text-left
+                            ${gameMode === "solo"
+                                    ? "border-cyan-400 bg-cyan-500/15 shadow-[0_0_20px_rgba(34,211,238,.25)]"
+                                    : "border-[#1C265A] bg-[#090F2A]/60 hover:border-[#2a3d7f]"
+                                }
+                            `}
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-600 to-blue-500 flex items-center justify-center">
+                                    <span className="text-xl">👤</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-white font-semibold text-sm xs:text-base">Shaxsiy rejim</h3>
+                                    <p className="text-[#9FA5C5] text-xs xs:text-sm">O'zingiz bilan tayyorlaning</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        {/* Multiplayer Mode */}
+                        <button
+                            onClick={() => setGameMode("multiplayer")}
+                            className={`p-4 xs:p-5 rounded-[18px] xs:rounded-[20px] border-2 transition-all duration-300 text-left
+                            ${gameMode === "multiplayer"
+                                    ? "border-cyan-400 bg-cyan-500/15 shadow-[0_0_20px_rgba(34,211,238,.25)]"
+                                    : "border-[#1C265A] bg-[#090F2A]/60 hover:border-[#2a3d7f]"
+                                }
+                            `}
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
+                                    <span className="text-xl">👥</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-white font-semibold text-sm xs:text-base">Raqobat rejimi</h3>
+                                    <p className="text-[#9FA5C5] text-xs xs:text-sm">2 o'yinchi - eng ko'p bal yutadi</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
                 {/* HEADER */}
@@ -223,6 +279,18 @@ export default function Testlar() {
                     ))}
                 </div>
 
+                {/* MULTIPLAYER INFO */}
+                {gameMode === "multiplayer" && (
+                    <div
+                        data-aos="fade-up"
+                        className="mt-6 xs:mt-8 p-3 xs:p-4 rounded-[16px] xs:rounded-[18px] border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm"
+                    >
+                        <p className="text-cyan-300 text-xs xs:text-sm">
+                            <span className="font-semibold">👥 Raqobat rejimi:</span> 2 o'yinchi bir vaqtda 10 ta savolga javob beradi. Kim ko'p to'g'ri javob topsa, o'sha odam g'alaba qozoni va XP oladi!
+                        </p>
+                    </div>
+                )}
+
                 {/* ACTION CARD */}
                 <div
                     data-aos="zoom-in"
@@ -235,6 +303,9 @@ export default function Testlar() {
 
                         <h3 className="text-white text-base xs:text-lg sm:text-xl font-bold mt-1">
                             {selectedSubject || "Fanni tanlang"}
+                            {gameMode === "multiplayer" && selectedSubject && (
+                                <span className="text-cyan-400"> • Raqobat 👥</span>
+                            )}
                         </h3>
                     </div>
 

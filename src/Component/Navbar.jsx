@@ -70,7 +70,7 @@ export default function Navbar() {
     return (
         <>
             {/* DESKTOP NAVBAR */}
-            <div className="hidden md:block fixed top-4 left-0 right-0 z-50 px-4">
+            <div className=" fixed hidden md:block top-4 left-0 right-0 z-50 px-4">
 
                 <nav className="max-w-[1300px] mx-auto w-full h-[75px] bg-[#0B1025]/40 backdrop-blur-xl border border-[#0f173eae] rounded-[20px]">
 
@@ -88,10 +88,10 @@ export default function Navbar() {
                             </div>
 
                             <div>
-                                <h1 className="text-white font-mono text-[18px]">
+                                <h1 className="text-white font-mono  text-[18px]">
                                     Bilim Olami
                                 </h1>
-                                <p className="text-[#9FA5C5] text-[12px]">
+                                <p className="text-[#9FA5C5] text-[12px] hidden md:block">
                                     61-maktab ta'lim
                                 </p>
                             </div>
@@ -99,7 +99,7 @@ export default function Navbar() {
                         </div>
 
                         {/* MENU */}
-                        <div className="flex gap-10">
+                        <div className="flex gap-10 hidden md:block">
 
                             <NavLink
                                 to="/"

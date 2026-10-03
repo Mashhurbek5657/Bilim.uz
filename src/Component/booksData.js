@@ -12,7 +12,7 @@ export const books = [
     id: 2,
     title: "TURKIY GULISTON YOXUD AXLOQ ",
     author: "Abdulla Avloniy",
-    image: "https://backend.book.uz/user-api/img/img-file-ef86e2577bd87f1c2d00532b977e862d.png",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwZCd-_YZ-SkESMR8jw3ivvHQQHB_JNgwCsv8HpCvmRwjrfaLvHS6GLoo&s=10",
     link: "https://www.ziyouz.com/books/axloq_va_odob/Abdulla%20Avloniy.%20Turkiy%20Guliston%20yoxud%20axloq.pdf"
   },
 
@@ -277,5 +277,4 @@ export const books = [
     image:"https://cdn-minio.mutolaa.com/media/books/2024/03/Abdulla_Avloniy._Turkiy_guliston_yoxud_Axloq.jpg",
     link:"https://www.ziyouz.com/books/axloq_va_odob/Abdulla%20Avloniy.%20Turkiy%20Guliston%20yoxud%20axloq.pdf"
   }
-
 ];

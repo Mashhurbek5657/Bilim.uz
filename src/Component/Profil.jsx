@@ -191,13 +191,13 @@ export default function Profil() {
       mx-auto
       px-4
   
-      mt-[130px]
+      mt-[100px]
   
       xs:mt-[130px]
       sm:mt-[130px]
       md:mt-[130px]
   
-      max-[767px]:-mt-[60px]
+      max-[767px]:-mt-[10px]
   
       mb-8
       xs:mb-10
