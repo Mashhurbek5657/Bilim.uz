@@ -11,7 +11,6 @@ import {
     Landmark,
     Dumbbell,
     Calculator,
-    Gamepad2,
 } from "lucide-react";
 
 import { useState, useEffect } from "react";
@@ -19,6 +18,9 @@ import { useNavigate } from "react-router-dom";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+// Sinflar ro'yxati: tests.js dagi kalitlar bilan bir xil ("1-sinf" ... "11-sinf")
+const GRADES = Array.from({ length: 11 }, (_, i) => `${i + 1}-sinf`);
 
 export default function Testlar() {
 
@@ -31,7 +33,7 @@ export default function Testlar() {
     }, []);
 
     const [selectedSubject, setSelectedSubject] = useState(null);
-    const [difficulty, setDifficulty] = useState("O'rta");
+    const [grade, setGrade] = useState("5-sinf");
     const [scrollPosition, setScrollPosition] = useState(0);
     const [gameMode, setGameMode] = useState("solo"); // "solo" yoki "multiplayer"
 
@@ -62,16 +64,17 @@ export default function Testlar() {
             return;
         }
 
+        // "difficulty" nomi saqlandi, shunda Quiz sahifasi eski kod bilan ishlayveradi:
+        // endi u "5-sinf" kabi qiymat oladi va tests.js dagi kalitga to'g'ri keladi.
         navigate("/quiz", {
             state: {
                 subject: selectedSubject,
-                difficulty,
+                difficulty: grade,
+                grade,
                 mode: gameMode
             }
         });
     };
-
-    const levels = ["Oson", "O'rta", "Qiyin", "Eng qiyin"];
 
     const handleScroll = (e) => {
         setScrollPosition(e.target.scrollLeft);
@@ -92,7 +95,7 @@ export default function Testlar() {
                             📝 Testlarni boshlang
                         </h1>
                         <p className="text-[#A6AECD] text-sm xs:text-base sm:text-lg mt-2 xs:mt-3">
-                            14+ fan, 4 qiyinlik darajasi va 1000+ savollar
+                            14 fan, 1–11 sinflar va 30 000+ savollar
                         </p>
                         <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4 mt-4 xs:mt-5">
                             <div className="px-3 xs:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-xl bg-[#071B4A] border border-[#223A78] text-white text-xs xs:text-sm">
@@ -115,7 +118,7 @@ export default function Testlar() {
                 {/* GAME MODE SELECTOR */}
                 <div data-aos="fade-up" className="mb-8 xs:mb-10 sm:mb-12">
                     <h2 className="text-white text-xl xs:text-2xl font-bold mb-3 xs:mb-4">
-                         O'yin rejimi
+                        O'yin rejimi
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 xs:gap-4">
                         {/* Solo Mode */}
@@ -174,7 +177,7 @@ export default function Testlar() {
                     data-aos="fade-right"
                     className="text-[#9FA5C5] mt-1 xs:mt-2 text-[13px] xs:text-[14px] sm:text-[15px]"
                 >
-                    Fan va qiyinlik darajasini tanlang
+                    Fan va sinfni tanlang
                 </p>
 
                 {/* SUBJECTS TITLE */}
@@ -185,13 +188,11 @@ export default function Testlar() {
                     Fanlar
                 </h2>
 
-                {/* SUBJECTS SLIDER - 2 ROWS WRAPPER */}
+                {/* SUBJECTS SLIDER */}
                 <div
                     data-aos="fade-up"
                     className="relative group"
                 >
-
-                    {/* SLIDER CONTAINER - 2 ROWS */}
                     <div
                         id="subjectsContainer"
                         onScroll={handleScroll}
@@ -201,7 +202,33 @@ export default function Testlar() {
                             WebkitOverflowScrolling: 'touch'
                         }}
                     >
-                        <div className="flex flex-wrap gap-3 xs:gap-4 sm:gap-5 pt-5 pb-4 w-max">
+                        <div
+                            className="flex flex-nowrap gap-3 xs:gap-4 sm:gap-5 pt-5 pb-4 w-full overflow-x-auto cursor-grab active:cursor-grabbing select-none scrollbar-hide"
+                            onMouseDown={(e) => {
+                                const slider = e.currentTarget;
+                                slider.isDown = true;
+                                slider.startX = e.pageX - slider.offsetLeft;
+                                slider.scrollLeftStart = slider.scrollLeft;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.isDown = false;
+                            }}
+                            onMouseUp={(e) => {
+                                e.currentTarget.isDown = false;
+                            }}
+                            onMouseMove={(e) => {
+                                const slider = e.currentTarget;
+
+                                if (!slider.isDown) return;
+
+                                e.preventDefault();
+
+                                const x = e.pageX - slider.offsetLeft;
+                                const walk = (x - slider.startX) * 1.5;
+
+                                slider.scrollLeft = slider.scrollLeftStart - walk;
+                            }}
+                        >
                             {subjects.map((subject, index) => {
                                 const Icon = subject.icon;
 
@@ -209,17 +236,30 @@ export default function Testlar() {
                                     <button
                                         key={index}
                                         onClick={() => setSelectedSubject(subject.name)}
-                                        className={`flex-shrink-0 w-[160px] xs:w-[180px] sm:w-[200px] md:w-[220px] h-[130px] xs:h-[135px] sm:h-[140px] rounded-[18px] xs:rounded-[20px] sm:rounded-2xl border p-3 xs:p-4 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_#1C265A]
-                                        ${selectedSubject === subject.name
+                                        className={`flex-shrink-0 w-[160px] xs:w-[180px] sm:w-[200px] md:w-[220px]
+                h-[130px] xs:h-[135px] sm:h-[140px]
+                rounded-[18px] xs:rounded-[20px] sm:rounded-2xl
+                border p-3 xs:p-4 text-left
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:shadow-[0_0_25px_#1C265A]
+                ${selectedSubject === subject.name
                                                 ? "border-cyan-400 bg-cyan-500/10"
                                                 : "border-[#1C265A] bg-[#090F2A]/60 backdrop-blur-lg"
-                                            }
-                                        `}
+                                            }`}
                                     >
                                         <div
-                                            className={`w-10 xs:w-11 h-10 xs:h-11 rounded-lg xs:rounded-xl bg-gradient-to-br ${subject.color} flex items-center justify-center mb-2 xs:mb-3`}
+                                            className={`w-10 xs:w-11 h-10 xs:h-11
+                    rounded-lg xs:rounded-xl
+                    bg-gradient-to-br ${subject.color}
+                    flex items-center justify-center
+                    mb-2 xs:mb-3`}
                                         >
-                                            <Icon size={16} className="xs:w-[18px]" color="white" />
+                                            <Icon
+                                                size={16}
+                                                className="xs:w-[18px]"
+                                                color="white"
+                                            />
                                         </div>
 
                                         <h3 className="text-white text-[14px] xs:text-[15px] sm:text-[16px] font-semibold line-clamp-2">
@@ -250,31 +290,31 @@ export default function Testlar() {
                     </div>
                 </div>
 
-                {/* DIFFICULTY TITLE */}
+                {/* GRADE TITLE */}
                 <h2
                     data-aos="fade-up"
                     className="text-white text-xl xs:text-2xl font-bold mt-8 xs:mt-10 sm:mt-12 mb-3 xs:mb-4"
                 >
-                    Qiyinlik
+                    Sinf
                 </h2>
 
-                {/* DIFFICULTY BUTTONS */}
+                {/* GRADE BUTTONS (1-11) */}
                 <div
                     data-aos="fade-up"
                     className="flex flex-wrap gap-2 xs:gap-3 sm:gap-3"
                 >
-                    {levels.map((level) => (
+                    {GRADES.map((g) => (
                         <button
-                            key={level}
-                            onClick={() => setDifficulty(level)}
+                            key={g}
+                            onClick={() => setGrade(g)}
                             className={`px-4 xs:px-5 py-2 xs:py-2.5 rounded-full border text-xs xs:text-sm transition-all duration-300
-                            ${difficulty === level
+                            ${grade === g
                                     ? "bg-purple-600/30 border-purple-500 text-white shadow-[0_0_15px_rgba(168,85,247,.25)]"
                                     : "border-[#1C265A] text-[#C6CCE8] hover:border-[#2a3d7f]"
                                 }
                             `}
                         >
-                            {level}
+                            {g}
                         </button>
                     ))}
                 </div>
@@ -286,7 +326,7 @@ export default function Testlar() {
                         className="mt-6 xs:mt-8 p-3 xs:p-4 rounded-[16px] xs:rounded-[18px] border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm"
                     >
                         <p className="text-cyan-300 text-xs xs:text-sm">
-                            <span className="font-semibold">👥 Raqobat rejimi:</span> 2 o'yinchi bir vaqtda 10 ta savolga javob beradi. Kim ko'p to'g'ri javob topsa, o'sha odam g'alaba qozoni va XP oladi!
+                            <span className="font-semibold">👥 Raqobat rejimi:</span> 2 o'yinchi bir vaqtda 10 ta savolga javob beradi. Kim ko'p to'g'ri javob topsa, o'sha odam g'alaba qozonadi va XP oladi!
                         </p>
                     </div>
                 )}
@@ -302,7 +342,7 @@ export default function Testlar() {
                         </p>
 
                         <h3 className="text-white text-base xs:text-lg sm:text-xl font-bold mt-1">
-                            {selectedSubject || "Fanni tanlang"}
+                            {selectedSubject ? `${selectedSubject} • ${grade}` : "Fanni tanlang"}
                             {gameMode === "multiplayer" && selectedSubject && (
                                 <span className="text-cyan-400"> • Raqobat 👥</span>
                             )}

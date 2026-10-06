@@ -8,35 +8,21 @@ export default function Register() {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [className, setClassName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState("+998 ");
 
     const [errors, setErrors] = useState({});
     const [errorMessages, setErrorMessages] = useState({});
-    const [passwordLevel, setPasswordLevel] = useState("");
-
-    // ✅ Parol darajasini tekshirish
-    const checkPassword = (v) => {
-        let text = "";
-
-        if (/[a-z]/.test(v) && /[0-9]/.test(v) && /[!@#$%^&*]/.test(v)) {
-            text = "Kuchli";
-        } else if (/[a-z]/.test(v) && /[0-9]/.test(v)) {
-            text = "O'rta";
-        } else if (/[a-z]/.test(v)) {
-            text = "Oson";
-        }
-
-        setPasswordLevel(text);
-    };
 
     // ✅ Ism - Katta harf bilan boshlash
     const validateName = (value) => {
+        if (!value) {
+            return "Ism kiritilishi shart";
+        }
         if (!/^[a-zA-Z\s]*$/.test(value)) {
             return "Ism faqat harflardan iborat bo'lishi kerak";
         }
         if (!/^[A-Z]/.test(value)) {
-            return "Ism katta harf bilan boshlashi kerak";
+            return "Ism katta harf bilan boshlanishi kerak";
         }
         if (value.length < 4) {
             return "Ism kamida 4 ta harf bo'lishi kerak";
@@ -46,14 +32,17 @@ export default function Register() {
 
     // ✅ Familiya - Katta harf bilan boshlash
     const validateSurname = (value) => {
+        if (!value) {
+            return "Familiya kiritilishi shart";
+        }
         if (!/^[a-zA-Z\s]*$/.test(value)) {
             return "Familiya faqat harflardan iborat bo'lishi kerak";
         }
         if (value.length < 4) {
-            return "Familiya kamina 4 ta harf bo'lishi kerak";
+            return "Familiya kamida 4 ta harf bo'lishi kerak";
         }
         if (!/^[A-Z]/.test(value)) {
-            return "Familiya katta harf bilan boshlashi kerak";
+            return "Familiya katta harf bilan boshlanishi kerak";
         }
         return "";
     };
@@ -61,7 +50,7 @@ export default function Register() {
     // ✅ Sinf - 1-11 va format: 8b, 9a, 11v
     const validateClassName = (value) => {
         if (!value) {
-            return "Sinfni tanlang";
+            return "Sinfni kiriting";
         }
         const regex = /^(1[0-1]|[1-9])([a-v])$/i;
         if (!regex.test(value)) {
@@ -70,84 +59,94 @@ export default function Register() {
         return "";
     };
 
-    // ✅ Email - @ bilan
-    const validateEmail = (value) => {
-        if (!value.includes("@")) {
-            return "Email-da @ bo'lishi kerak";
+    // ✅ Telefon raqami - +998 dan keyin 9 ta raqam bo'lishi kerak
+    const validatePhone = (value) => {
+        const cleanPhone = value.replace(/\D/g, ""); // Faqat raqamlarni ajratish
+        if (!cleanPhone.startsWith("998")) {
+            return "Raqam +998 bilan boshlanishi kerak";
         }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-            return "To'g'ri email manzilini kiriting";
+        if (cleanPhone.length !== 12) {
+            return "Telefon raqami to'liq va 9 xonali bo'lishi kerak";
         }
         return "";
     };
 
-    // ✅ Parol - 6+ ta belgi
-    const validatePassword = (value) => {
-        if (value.length < 6) {
-            return "Parol kamina 6 ta belgi bo'lishi kerak";
+    const handleNameChange = (e) => {
+        const val = e.target.value;
+        setName(val);
+        const err = validateName(val);
+        setErrors((prev) => ({ ...prev, name: !!err }));
+        setErrorMessages((prev) => ({ ...prev, name: err }));
+    };
+
+    const handleSurnameChange = (e) => {
+        const val = e.target.value;
+        setSurname(val);
+        const err = validateSurname(val);
+        setErrors((prev) => ({ ...prev, surname: !!err }));
+        setErrorMessages((prev) => ({ ...prev, surname: err }));
+    };
+
+    const handleClassChange = (e) => {
+        const val = e.target.value.toLowerCase();
+        setClassName(val);
+        const err = validateClassName(val);
+        setErrors((prev) => ({ ...prev, className: !!err }));
+        setErrorMessages((prev) => ({ ...prev, className: err }));
+    };
+
+    const handlePhoneChange = (e) => {
+        let val = e.target.value;
+        if (!val.startsWith("+998 ")) {
+            val = "+998 ";
         }
-        return "";
+        setPhone(val);
+        const err = validatePhone(val);
+        setErrors((prev) => ({ ...prev, phone: !!err }));
+        setErrorMessages((prev) => ({ ...prev, phone: err }));
     };
 
     const register = (e) => {
         e.preventDefault();
 
-        let err = {};
-        let msgs = {};
+        const nameErr = validateName(name);
+        const surnameErr = validateSurname(surname);
+        const classErr = validateClassName(className);
+        const phoneErr = validatePhone(phone);
 
-        // ✅ Barcha tekshiruvlar
-        const nameError = validateName(name);
-        if (nameError) {
-            err.name = true;
-            msgs.name = nameError;
-        }
+        const newErrors = {
+            name: !!nameErr,
+            surname: !!surnameErr,
+            className: !!classErr,
+            phone: !!phoneErr,
+        };
 
-        const surnameError = validateSurname(surname);
-        if (surnameError) {
-            err.surname = true;
-            msgs.surname = surnameError;
-        }
+        const newErrorMsgs = {
+            name: nameErr,
+            surname: surnameErr,
+            className: classErr,
+            phone: phoneErr,
+        };
 
-        const classNameError = validateClassName(className);
-        if (classNameError) {
-            err.className = true;
-            msgs.className = classNameError;
-        }
+        setErrors(newErrors);
+        setErrorMessages(newErrorMsgs);
 
-        const emailError = validateEmail(email);
-        if (emailError) {
-            err.email = true;
-            msgs.email = emailError;
-        }
-
-        const passwordError = validatePassword(password);
-        if (passwordError) {
-            err.password = true;
-            msgs.password = passwordError;
-        }
-
-        setErrors(err);
-        setErrorMessages(msgs);
-
-        if (Object.keys(err).length) {
+        if (nameErr || surnameErr || classErr || phoneErr) {
             toast.error("Ma'lumotlarni to'g'ri kiriting");
             return;
         }
 
-        // ✅ Saqlash
         const newUser = {
             id: Date.now(),
             name,
             surname,
             className,
-            email,
-            password,
+            phone,
             avatar: "",
-            xp: 0
+            xp: 0,
         };
 
-        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
         users.push(newUser);
 
         localStorage.setItem("users", JSON.stringify(users));
@@ -288,79 +287,31 @@ shadow-[0_0_35px_rgba(124,58,237,.25)]
                             )}
                         </div>
 
+                        {/* Telefon raqami */}
                         <div>
                             <label className="text-white text-sm font-semibold">
-                                Email
+                                Telefon raqami
                             </label>
+
                             <input
-                                type="email"
-                                placeholder="email@bilim.uz"
-                                value={email}
-                                onChange={(e) => {
-                                    setEmail(e.target.value);
-                                    if (e.target.value) {
-                                        const err = validateEmail(e.target.value);
-                                        if (err) {
-                                            setErrors({ ...errors, email: true });
-                                            setErrorMessages({ ...errorMessages, email: err });
-                                        } else {
-                                            setErrors({ ...errors, email: false });
-                                            setErrorMessages({ ...errorMessages, email: "" });
-                                        }
-                                    }
-                                }}
-                                className={`mt-1 w-full rounded-lg bg-[#10133A] border px-3 py-2 text-sm text-white outline-none transition ${errors.email ? "border-red-500" : "border-[#273066]"
+                                type="tel"
+                                placeholder="+998 90 123 45 67"
+                                value={phone}
+                                onChange={handlePhoneChange}
+                                maxLength={17}
+                                className={`mt-1 w-full rounded-lg bg-[#10133A] border px-3 py-2 text-sm text-white outline-none transition ${errors.phone
+                                        ? "border-red-500"
+                                        : "border-[#273066]"
                                     }`}
                             />
-                            {errors.email && (
-                                <p className="text-red-400 text-xs mt-1">{errorMessages.email}</p>
-                            )}
-                        </div>
 
-                        <div>
-                            <label className="text-white text-sm font-semibold">
-                                Parol
-                            </label>
-                            <input
-                                type="password"
-                                placeholder="password (kamina 6 ta belgi)"
-                                value={password}
-                                onChange={(e) => {
-                                    setPassword(e.target.value);
-                                    checkPassword(e.target.value);
-                                    if (e.target.value) {
-                                        const err = validatePassword(e.target.value);
-                                        if (err) {
-                                            setErrors({ ...errors, password: true });
-                                            setErrorMessages({ ...errorMessages, password: err });
-                                        } else {
-                                            setErrors({ ...errors, password: false });
-                                            setErrorMessages({ ...errorMessages, password: "" });
-                                        }
-                                    }
-                                }}
-                                className={`mt-1 w-full rounded-lg bg-[#10133A] border px-3 py-2 text-sm text-white outline-none transition ${errors.password ? "border-red-500" : "border-[#273066]"
-                                    }`}
-                            />
-                            {errors.password && (
-                                <p className="text-red-400 text-xs mt-1">{errorMessages.password}</p>
-                            )}
-
-                            {password && (
-                                <p
-                                    className={`text-xs font-semibold mt-2 ${passwordLevel === "Kuchli"
-                                            ? "text-green-400"
-                                            : passwordLevel === "O'rta"
-                                                ? "text-yellow-400"
-                                                : passwordLevel === "Oson"
-                                                    ? "text-red-400"
-                                                    : "text-gray-400"
-                                        }`}
-                                >
-                                    Qiyinlik darajasi: {passwordLevel || "—"}
+                            {errors.phone && (
+                                <p className="text-red-400 text-xs mt-1">
+                                    {errorMessages.phone}
                                 </p>
                             )}
                         </div>
+
 
                         <button
                             className="

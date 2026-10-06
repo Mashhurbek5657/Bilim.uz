@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
-import { questions } from "../data/questions";
+import { questions } from "../data/generateQuestions";
 import confetti from "canvas-confetti";
 
 export default function QuizPage() {
