@@ -340,8 +340,8 @@ export default function QuizPage() {
                         {/* Player 1 */}
                         <div
                             className={`border-2 rounded-2xl p-6 text-center ${player1Score > player2Score
-                                    ? "border-cyan-400 bg-cyan-500/10"
-                                    : "border-[#1C265A] bg-[#090F2A]/60"
+                                ? "border-cyan-400 bg-cyan-500/10"
+                                : "border-[#1C265A] bg-[#090F2A]/60"
                                 }`}
                         >
                             <div className="text-4xl mb-3">👤</div>
@@ -379,8 +379,8 @@ export default function QuizPage() {
                         {/* Player 2 */}
                         <div
                             className={`border-2 rounded-2xl p-6 text-center ${player2Score > player1Score
-                                    ? "border-cyan-400 bg-cyan-500/10"
-                                    : "border-[#1C265A] bg-[#090F2A]/60"
+                                ? "border-cyan-400 bg-cyan-500/10"
+                                : "border-[#1C265A] bg-[#090F2A]/60"
                                 }`}
                         >
                             <div className="text-4xl mb-3">👥</div>
@@ -493,12 +493,12 @@ export default function QuizPage() {
                             })}
                         </div>
                         <div className=" flex justify-between bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 flex gap-3 md:gap-4">
-                    <button
-                        onClick={() => navigate("/testlar")}
-                        className="mt-7  block px-8 py-3 rounded-xl bg-gradient-to-r bg-red-600/20 border border-red-500/50 text-red-400 font-semibold text-sm hover:bg-red-600/30"
-                    >
-                        ← Chiqish
-                    </button>
+                            <button
+                                onClick={() => navigate("/testlar")}
+                                className="mt-7  block px-8 py-3 rounded-xl bg-gradient-to-r bg-red-600/20 border border-red-500/50 text-red-400 font-semibold text-sm hover:bg-red-600/30"
+                            >
+                                ← Chiqish
+                            </button>
 
                             <button
                                 disabled={!showAnswer}
@@ -521,10 +521,10 @@ export default function QuizPage() {
         const bothDone = player1Done && player2Done;
 
         return (
-            <div className="min-h-screen px-0 pt-[120px] max-md:-mt-[160px] ">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-screen md:h-auto">
+            <div className="min-h-screen px-0 pt-[120px] pb-[130px] md:pb-10 max-md:-mt-[160px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                     {/* ========== PLAYER 1 SIDE ========== */}
-                    <div className="border-r md:border-r border-[#1C265A] p-4 md:p-6">
+                    <div className="border-b md:border-b-0 md:border-r border-[#1C265A] p-4 md:p-6">
                         <div className="flex justify-between items-center mb-4">
                             <div>
                                 <h2 className="text-white text-xl font-bold">
@@ -713,8 +713,8 @@ export default function QuizPage() {
                 </div>
 
                 {/* ========== ACTION BUTTONS ========== */}
-                <div className=" flex justify-between bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 flex gap-3 md:gap-4">
-                    <button
+                <div className="flex justify-between gap-3 md:gap-4 px-4 md:px-6 mt-4"> 
+                                       <button
                         onClick={() => navigate("/testlar")}
                         className="flex-1 md:flex-none px-6 py-3 rounded-xl bg-red-600/20 border border-red-500/50 text-red-400 font-semibold text-sm hover:bg-red-600/30"
                     >
