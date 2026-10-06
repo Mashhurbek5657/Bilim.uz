@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#jivo-iframe-container {
+    bottom: 120px !important;
+    z-index: 99999 !important;
+}
+
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
