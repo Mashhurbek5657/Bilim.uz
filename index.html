@@ -1,55 +1,14 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="./public/B_neon_logo_large_centered.svg"
-    />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+    <link rel="icon" type="image/svg+xml" href="./public/B_neon_logo_large_centered.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bilim olami</title>
-
-    <!-- JivoChat -->
-    <script
-      src="//code.jivo.ru/widget/Mfxw2JMBRm"
-      async
-    ></script>
+    <script src="//code.jivo.ru/widget/Mfxw2JMBRm" async></script>
   </head>
-
   <body>
     <div id="root"></div>
-
     <script type="module" src="/src/main.jsx"></script>
-
-    <!-- JivoChat joylashuvini yuqoriga ko'tarish -->
-    <script>
-      window.addEventListener("load", () => {
-        const moveJivo = () => {
-          const jivo = document.querySelector("#jivo-iframe-container");
-
-          if (jivo) {
-            jivo.style.setProperty(
-              "bottom",
-              "100px",
-              "important"
-            );
-          }
-        };
-
-        moveJivo();
-
-        const observer = new MutationObserver(moveJivo);
-
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-    </script>
   </body>
 </html>
