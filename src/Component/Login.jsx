@@ -212,7 +212,7 @@ export default function Register() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-[26px] border border-purple-500/40 bg-[#090B2A]/70 backdrop-blur-xl p-4 sm:p-6 shadow-[0_0_35px_rgba(124,58,237,.25)]">
                 <iframe
                     src="https://my.spline.design/genkubgreetingrobot-BEJT5t4bdIAhgacAXRzXgd9K/"
-                    className="w-full h-[260px] sm:h-[350px] lg:w-[500px] lg:h-[500px] rounded-md"
+                    className="w-full hidden md:block h-[260px] sm:h-[350px] lg:w-[500px] lg:h-[500px] rounded-md"
                 />
 
                 <div>

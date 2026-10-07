@@ -300,24 +300,37 @@ export default function Testlar() {
 
                 {/* GRADE BUTTONS (1-11) */}
                 <div
-                    data-aos="fade-up"
-                    className="flex flex-wrap gap-2 xs:gap-3 sm:gap-3"
-                >
-                    {GRADES.map((g) => (
-                        <button
-                            key={g}
-                            onClick={() => setGrade(g)}
-                            className={`px-4 xs:px-5 py-2 xs:py-2.5 rounded-full border text-xs xs:text-sm transition-all duration-300
-                            ${grade === g
-                                    ? "bg-purple-600/30 border-purple-500 text-white shadow-[0_0_15px_rgba(168,85,247,.25)]"
-                                    : "border-[#1C265A] text-[#C6CCE8] hover:border-[#2a3d7f]"
-                                }
-                            `}
-                        >
-                            {g}
-                        </button>
-                    ))}
-                </div>
+    data-aos="fade-up"
+    className="
+        flex flex-nowrap gap-2 xs:gap-3 sm:gap-3
+        overflow-x-auto
+        scrollbar-hide
+        touch-pan-x
+        select-none
+        cursor-grab
+        active:cursor-grabbing
+    "
+>
+    {GRADES.map((g) => (
+        <button
+            key={g}
+            onClick={() => setGrade(g)}
+            className={`
+                flex-shrink-0
+                px-4 xs:px-5 py-2 xs:py-2.5
+                rounded-full border
+                text-xs xs:text-sm
+                transition-all duration-300
+                ${grade === g
+                    ? "bg-purple-600/30 border-purple-500 text-white shadow-[0_0_15px_rgba(168,85,247,.25)]"
+                    : "border-[#1C265A] text-[#C6CCE8] hover:border-[#2a3d7f]"
+                }
+            `}
+        >
+            {g}
+        </button>
+    ))}
+</div>
 
                 {/* MULTIPLAYER INFO */}
                 {gameMode === "multiplayer" && (
