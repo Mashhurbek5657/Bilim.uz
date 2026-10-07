@@ -110,12 +110,10 @@ export default function Books() {
 
             {row.map((book) => (
               <a
-                key={book.id}
-                href={book.link}
-                target="_blank"
-                rel="noreferrer"
-                className="group rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] lg:rounded-[25px] overflow-hidden bg-[#050D22] border border-[#20336B] hover:border-cyan-400 transition-all duration-500 hover:-translate-y-2 shadow-[0_0_35px_rgba(0,200,255,.08)] hover:shadow-[0_0_50px_rgba(0,200,255,.2)]"
-              >
+              key={book.id}
+              href={book.link}
+              className="group rounded-[16px] xs:rounded-[18px] sm:rounded-[20px] lg:rounded-[25px] overflow-hidden bg-[#050D22] border border-[#20336B] hover:border-cyan-400 transition-all duration-500 hover:-translate-y-2 shadow-[0_0_35px_rgba(0,200,255,.08)] hover:shadow-[0_0_50px_rgba(0,200,255,.2)]"
+          >
 
                 {/* IMAGE CONTAINER */}
                 <div className="h-[160px] xs:h-[180px] sm:h-[200px] md:h-[240px] lg:h-[300px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#081020] to-[#101B45] relative">

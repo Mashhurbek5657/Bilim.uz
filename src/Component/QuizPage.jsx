@@ -535,7 +535,16 @@ export default function QuizPage() {
                             </button>
                             <button
                                 disabled={!showAnswer}
-                                onClick={nextQuestion}
+                                onClick={() => {
+                                    nextQuestion();
+
+                                    setTimeout(() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: "smooth"
+                                        });
+                                    }, 50);
+                                }}
                                 className="mt-7 ml-auto block px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 text-white disabled:opacity-40"
                             >
                                 {currentQuestion === quizQuestions.length - 1 ? "Yakunlash" : "Keyingisi →"}
@@ -573,7 +582,16 @@ export default function QuizPage() {
                     </button>
                     <button
                         disabled={!p1Show || !p2Show}
-                        onClick={nextMultiplayerQuestion}
+                        onClick={() => {
+                            nextMultiplayerQuestion();
+
+                            setTimeout(() => {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth"
+                                });
+                            }, 50);
+                        }}
                         className="flex-1 md:flex-none px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-semibold text-sm disabled:opacity-40"
                     >
                         {p1Index >= PER_TEST - 1 ? "Yakunlash" : "Keyingisi →"}
