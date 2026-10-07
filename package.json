@@ -21,6 +21,7 @@
     "dotenv": "^16.6.1",
     "express": "^4.22.3",
     "lucide-react": "^1.23.0",
+    "mongoose": "^9.11.0",
     "node-fetch": "^2.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
